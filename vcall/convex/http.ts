@@ -1,8 +1,11 @@
 import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { WebhookEvent } from "@clerk/nextjs/server";
+// webhookEvent tells your code what properties to expect in a webhook payload.
+
 import { Webhook } from "svix";
 import { api } from "./_generated/api";
+//api object is the bridge between your frontend code and your backend database logic.
 
 const http = httpRouter();
 
@@ -10,11 +13,12 @@ http.route({
   path: "/clerk-webhook",
   method: "POST",
   handler: httpAction(async (ctx, request) => {
+    //ctx: object that gives your function access to the database, authentication info, and ability to run other functions.
     const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
     if (!webhookSecret) {
       throw new Error("Missing CLERK_WEBHOOK_SECRET environment variable");
     }
-    
+  // Svix is a service that specializes in webhook management. Clerk uses Svix to handle webhook delivery and signature verification.  
     const svix_id = request.headers.get("svix-id");
     const svix_signature = request.headers.get("svix-signature");
     const svix_timestamp = request.headers.get("svix-timestamp");
@@ -43,7 +47,7 @@ http.route({
     }
     
     const eventType = evt.type;
-    
+    // it ensures the webhook actually came from Clerk
     if (eventType === "user.created") {
       const { id, email_addresses, first_name, last_name, image_url } = evt.data;
       

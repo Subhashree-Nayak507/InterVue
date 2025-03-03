@@ -1,5 +1,9 @@
 import { defineSchema, defineTable } from "convex/server";
+//defineSchema: A function provided by Convex to define the overall schema of the database.
+//defineTable: A function to define individual tables within the schema.
+
 import { v } from "convex/values";
+//v-: A utility/tool from Convex to define the types of fields in the tables[strings,etc]
 
 export default defineSchema({
   users: defineTable({
