@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import useMeetingActions from "@/hooks/useMeetingActions";
 
 interface MeetingModalProps {
   isOpen: boolean;
@@ -12,12 +13,23 @@ interface MeetingModalProps {
 
 function MeetingModal({ isOpen, onClose, title, isJoinMeeting }: MeetingModalProps) {
   const [meetingUrl, setMeetingUrl] = useState("");
+  const { createInstantMeeting, joinMeeting } = useMeetingActions();
+
   const createMeeting= async ()=>{};
-  const joinMeeting= async ()=>{};
 
   const handleStart = () => {
-  
+    if (isJoinMeeting) {
+      // if it's a full URL extract meeting ID
+      const meetingId = meetingUrl.split("/").pop();
+      if (meetingId) joinMeeting(meetingId);
+    } else {
+      createInstantMeeting();
+    }
+
+    setMeetingUrl("");
+    onClose();
   };
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -36,10 +48,16 @@ function MeetingModal({ isOpen, onClose, title, isJoinMeeting }: MeetingModalPro
           )}
 
           <div className="flex justify-end gap-3">
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" onClick={onClose} 
+            className="bg-green-500 text-black hover:bg-green-600 focus:ring-green-700"
+            >
               Cancel
             </Button>
-            <Button onClick={handleStart} disabled={isJoinMeeting && !meetingUrl.trim()}>
+            <Button 
+            onClick={handleStart} 
+            disabled={isJoinMeeting && !meetingUrl.trim()}
+             className="bg-green-500 text-black hover:bg-green-600 focus:ring-green-700"
+            >
               {isJoinMeeting ? "Join Meeting" : "Start Meeting"}
             </Button>
           </div>
