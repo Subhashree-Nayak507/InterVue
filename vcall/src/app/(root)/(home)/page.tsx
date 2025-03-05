@@ -8,6 +8,7 @@ import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import MeetingModal from "@/components/MeetingModal";
+import LoaderUI from "@/components/LoaderUi";
 
 export default function Home() {
   const { isInterviewer, isCandidate, isLoading } = useUserRole();
@@ -33,7 +34,7 @@ export default function Home() {
     }
   };
 
-  if (isLoading) return <div>loading..</div>
+  if (isLoading) return <LoaderUI />
 
 
   return (

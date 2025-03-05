@@ -15,8 +15,6 @@ function MeetingModal({ isOpen, onClose, title, isJoinMeeting }: MeetingModalPro
   const [meetingUrl, setMeetingUrl] = useState("");
   const { createInstantMeeting, joinMeeting } = useMeetingActions();
 
-  const createMeeting= async ()=>{};
-
   const handleStart = () => {
     if (isJoinMeeting) {
       // if it's a full URL extract meeting ID

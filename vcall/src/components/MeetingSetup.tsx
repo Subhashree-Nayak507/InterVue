@@ -4,28 +4,39 @@ import { Card } from "@/components/ui/card";
 import { CameraIcon, MicIcon, SettingsIcon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import toast from 'react-hot-toast';
 
 const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
   const [isCameraDisabled, setIsCameraDisabled] = useState(true);
   const [isMicDisabled, setIsMicDisabled] = useState(false);
 
   const call = useCall();
+  //This is a hook provided by the @stream-io/video-react-sdk library. It returns the current call object, which represents the video call session.
   if (!call) return null;
 
   useEffect(() => {
     if (isCameraDisabled) call.camera.disable();
-    else call.camera.enable();
+    else {call.camera.enable()
+      toast.success("camera enabled")
+    };
   }, [isCameraDisabled, call.camera]);
 
   useEffect(() => {
     if (isMicDisabled) call.microphone.disable();
-    else call.microphone.enable();
+    else {call.microphone.enable();
+      toast.success("mic enabled")
+    }
   }, [isMicDisabled, call.microphone]);
 
   const handleJoin = async () => {
     await call.join();
     onSetupComplete();
   };
+ 
+
+
+// console.log('Camera capabilities:', call?.camera);
+// console.log('Microphone capconsabilities:', call?.microphone);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-background/95">
@@ -41,7 +52,7 @@ const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
             {/* VIDEO PREVIEW */}
             <div className="mt-4 flex-1 min-h-[400px] rounded-xl overflow-hidden bg-muted/50 border relative">
               <div className="absolute inset-0">
-                <VideoPreview className="h-full w-full" />
+              <VideoPreview/>
               </div>
             </div>
           </Card>

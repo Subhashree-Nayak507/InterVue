@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+//Call:  a video call object.
+
+//useStreamVideoClient: A hook provided by the library that returns the Stream video client instance. This client is used to interact with the Stream API (e.g., querying calls)
 
 const useGetCallById = (id: string | string[]) => {
   const [call, setCall] = useState<Call>();
