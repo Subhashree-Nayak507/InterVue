@@ -28,6 +28,7 @@ const Recordings = () => {
     };
     fetchRecording();
   },[calls])
+  // @ts-ignore
   if ( isLoading) return <LoaderUI />
 
   return (

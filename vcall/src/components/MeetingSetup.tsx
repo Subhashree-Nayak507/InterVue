@@ -15,6 +15,7 @@ const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
   if (!call) return null;
 
   useEffect(() => {
+   
     if (isCameraDisabled) call.camera.disable();
     else {call.camera.enable()
       toast.success("camera enabled")
@@ -22,6 +23,7 @@ const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
   }, [isCameraDisabled, call.camera]);
 
   useEffect(() => {
+  
     if (isMicDisabled) call.microphone.disable();
     else {call.microphone.enable();
       toast.success("mic enabled")
@@ -32,8 +34,6 @@ const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
     await call.join();
     onSetupComplete();
   };
- 
-
 
 // console.log('Camera capabilities:', call?.camera);
 // console.log('Microphone capconsabilities:', call?.microphone);

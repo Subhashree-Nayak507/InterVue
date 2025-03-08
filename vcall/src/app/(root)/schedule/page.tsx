@@ -10,6 +10,7 @@ const Schedule = () => {
   const router = useRouter();
   const { isInterviewer,isLoading} = useUserRole();
 
+  // @ts-ignore
   if ( isLoading) return <LoaderUI />
   if(!isInterviewer) return router.push('/');
 

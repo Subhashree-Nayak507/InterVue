@@ -85,7 +85,9 @@ const MeetingRoom = () => {
                   >
                     <UsersIcon className="size-4" />
                   </Button>
-                  <EndCallButton />
+                  <EndCallButton
+              
+                   />
                 </div>
               </div>
             </div>

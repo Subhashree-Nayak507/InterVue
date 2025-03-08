@@ -43,7 +43,10 @@ function EndCallButton() {
   };
 
   return (
-    <Button variant={"destructive"} onClick={endCall}>
+    <Button variant={"destructive"} onClick={endCall}
+    className="bg-red-600 hover:bg-red-700 text-white rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg
+                p-2 sm:p-3 md:p-4 lg:p-5" 
+    >
       End Meeting
     </Button>
   );
