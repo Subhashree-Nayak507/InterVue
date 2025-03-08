@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Doc, Id } from "../../../../convex/_generated/dataModel";
 import toast from "react-hot-toast";
+import LoaderUI from "@/components/LoaderUi";
 import { getCandidateInfo, groupInterviews } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarIcon, CheckCircle2Icon, ClockIcon, XCircleIcon } from "lucide-react";
 import { format } from "date-fns";
 import CommentDialog from "@/components/CommentDialog";
-import LoaderUI from "@/components/LoaderUi";
 
 type Interview = Doc<"interviews">;
 
