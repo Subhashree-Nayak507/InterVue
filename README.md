@@ -47,7 +47,7 @@ NEXT_PUBLIC_CONVEX_URL=your_convex_url
 NEXT_PUBLIC_STREAM_API_KEY=your_stream_api_key
 STREAM_SECRET_KEY=your_stream_secret_key
 ```
-### 3.tart the Development Server
+### 3.Start the Development Server
 
 ```bash
 npm run dev
