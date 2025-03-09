@@ -32,8 +32,6 @@ const MeetingSetup = ({ onSetupComplete }: { onSetupComplete: () => void }) => {
     await call.join();
     onSetupComplete();
   };
- 
-
 
 // console.log('Camera capabilities:', call?.camera);
 // console.log('Microphone capconsabilities:', call?.microphone);

@@ -42,7 +42,7 @@ function MeetingCard({ interview }: { interview: Interview }) {
 
       <CardContent>
         {status === "live" && (
-          <Button className="w-full" onClick={() => joinMeeting(interview.streamCallId)}>
+          <Button className="w-full  bg-red-600 text-white hover:bg-red-400 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform" onClick={() => joinMeeting(interview.streamCallId)}>
             Join Meeting
           </Button>
         )}

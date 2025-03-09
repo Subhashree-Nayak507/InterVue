@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUi";
+import MeetingCard from "@/components/MeetingCard";
 
 export default function Home() {
   const { isInterviewer, isCandidate, isLoading } = useUserRole();
@@ -33,7 +34,7 @@ export default function Home() {
         router.push(`/${title.toLowerCase()}`);
     }
   };
-
+// @ts-ignore
   if (isLoading) return <LoaderUI />
 
 
@@ -84,10 +85,10 @@ export default function Home() {
               </div>
             ) : interviews.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {/* {interviews.map((interview) => (
-                  <MeetingCard key={interview._id} interview={interview} />
-                ))} */} meetings
-              </div>
+  {interviews.map((interview) => (
+    <MeetingCard key={interview._id} interview={interview} />
+  ))}
+</div>
             ) : (
               <div className="text-center py-12 text-muted-foreground">
                 You have no scheduled interviews at the moment

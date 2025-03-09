@@ -26,6 +26,7 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     setStreamVideoClient(client);
   }, [user, isLoaded]);
 
+// @ts-ignore
 if (!streamVideoClient) return <LoaderUI />;  
 
   return <StreamVideo client={streamVideoClient}>{children}</StreamVideo>;

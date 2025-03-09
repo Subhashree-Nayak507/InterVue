@@ -14,7 +14,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalendarIcon, CheckCircle2Icon, ClockIcon, XCircleIcon } from "lucide-react";
 import { format } from "date-fns";
-//import CommentDialog from "@/components/CommentDialog";
+import CommentDialog from "@/components/CommentDialog";
 
 type Interview = Doc<"interviews">;
 
@@ -31,7 +31,7 @@ function DashboardPage() {
       toast.error("Failed to update status");
     }
   };
-
+ // @ts-ignore
   if (!interviews || !users) return <LoaderUI />;
 
   const groupedInterviews = groupInterviews(interviews);
@@ -40,7 +40,11 @@ function DashboardPage() {
     <div className="container mx-auto py-10">
       <div className="flex items-center mb-8">
         <Link href="/schedule">
-          <Button>Schedule New Interview</Button>
+          <Button
+            className="bg-green-600 text-white hover:bg-green-700 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+          >
+            Schedule New Interview
+          </Button>
         </Link>
       </div>
 
@@ -61,7 +65,7 @@ function DashboardPage() {
                     const startTime = new Date(interview.startTime);
 
                     return (
-                      <Card  key={interview._id}  className="hover:shadow-md transition-all">
+                      <Card key={interview._id} className="hover:shadow-md transition-all">
                         {/* CANDIDATE INFO */}
                         <CardHeader className="p-4">
                           <div className="flex items-center gap-3">
@@ -76,7 +80,7 @@ function DashboardPage() {
                           </div>
                         </CardHeader>
 
-                        {/* DATE &  TIME */}
+                        {/* DATE & TIME */}
                         <CardContent className="p-4">
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
@@ -92,28 +96,26 @@ function DashboardPage() {
 
                         {/* PASS & FAIL BUTTONS */}
                         <CardFooter className="p-4 pt-0 flex flex-col gap-3">
-                        {interview.status === "completed" ? (
-    <div className="flex gap-2 w-full">
-      <Button
-        className="flex-1"
-        onClick={() => handleStatusUpdate(interview._id, "succeeded")}
-      >
-        <CheckCircle2Icon className="h-4 w-4 mr-2" />
-        Pass
-      </Button>
-      <Button
-        variant="destructive"
-        className="flex-1"
-        onClick={() => handleStatusUpdate(interview._id, "failed")}
-      >
-        <XCircleIcon className="h-4 w-4 mr-2" />
-        Fail
-      </Button>
-    </div>
-  ) : (
-    <p className="text-xs text-muted-foreground">Status: {interview.status}</p>
-  )}
-                         {/* // <CommentDialog interviewId={interview._id} /> */}
+                          {interview.status === "completed" && (
+                            <div className="flex gap-2 w-full">
+                              <Button
+                                className="flex-1 bg-green-600 hover:bg-green-700 text-white transition-all duration-300 ease-in-out transform hover:scale-105"
+                                onClick={() => handleStatusUpdate(interview._id, "succeeded")}
+                              >
+                                <CheckCircle2Icon className="h-4 w-4 mr-2" />
+                                Pass
+                              </Button>
+                              <Button
+                                variant="destructive"
+                                className="flex-1 bg-red-600 hover:bg-red-700 text-white transition-all duration-300 ease-in-out transform hover:scale-105"
+                                onClick={() => handleStatusUpdate(interview._id, "failed")}
+                              >
+                                <XCircleIcon className="h-4 w-4 mr-2" />
+                                Fail
+                              </Button>
+                            </div>
+                          )}
+                          <CommentDialog interviewId={interview._id} />
                         </CardFooter>
                       </Card>
                     );
@@ -126,4 +128,5 @@ function DashboardPage() {
     </div>
   );
 }
+
 export default DashboardPage;
