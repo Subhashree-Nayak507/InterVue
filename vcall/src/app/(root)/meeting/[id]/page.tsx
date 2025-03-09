@@ -12,9 +12,7 @@ import { useState } from "react";
 function MeetingPage() {
   const { id } = useParams();
   const { isLoaded } = useUser();
-
-   const meetingId = params?.id;  // Changed variable name
-  const { call, isCallLoading } = useGetCallById(meetingId);
+  const { call, isCallLoading } = useGetCallById(id);
 
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
